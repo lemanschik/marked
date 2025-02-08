@@ -24,25 +24,19 @@ export class _Renderer {
 
   code({ text, lang, escaped }: Tokens.Code): string {
     const langString = (lang || '').match(other.notSpaceStart)?.[0];
-
     const code = text.replace(other.endingNewline, '') + '\n';
-
-    if (!langString) {
-      return '<pre><code>'
-        + (escaped ? code : escape(code, true))
-        + '</code></pre>\n';
-    }
-
-    return '<pre><code class="language-'
-      + escape(langString)
-      + '">'
-      + (escaped ? code : escape(code, true))
-      + '</code></pre>\n';
+    
+    return `<pre><code${
+      langString 
+        ? ` class="language-${escape(langString)}"`
+        : ''
+    }>${(escaped ? code : escape(code, true)}</code></pre>\n`;
   }
 
   blockquote({ tokens }: Tokens.Blockquote): string {
-    const body = this.parser.parse(tokens);
-    return `<blockquote>\n${body}</blockquote>\n`;
+    return `<blockquote>\n${
+      this.parser.parse(tokens)
+    }</blockquote>\n`;
   }
 
   html({ text }: Tokens.HTML | Tokens.Tag) : string {
@@ -60,45 +54,40 @@ export class _Renderer {
   list(token: Tokens.List): string {
     const ordered = token.ordered;
     const start = token.start;
-
-    let body = '';
-    for (let j = 0; j < token.items.length; j++) {
-      const item = token.items[j];
-      body += this.listitem(item);
-    }
-
     const type = ordered ? 'ol' : 'ul';
     const startAttr = (ordered && start !== 1) ? (' start="' + start + '"') : '';
-    return '<' + type + startAttr + '>\n' + body + '</' + type + '>\n';
+    
+    return `<${type}${startAttr}>\n${
+      token.items.map(this.listitem).join("")
+    }</${type}>\n`;
   }
 
   listitem(item: Tokens.ListItem): string {
-    let itemBody = '';
-    if (item.task) {
-      const checkbox = this.checkbox({ checked: !!item.checked });
-      if (item.loose) {
+  const checkbox = item.task && `${this.checkbox({ checked: Boolean(item.checked }))} `;
+  if (checkbox) { 
+      if (item.loose && item.tokens.length) {
         if (item.tokens[0]?.type === 'paragraph') {
-          item.tokens[0].text = checkbox + ' ' + item.tokens[0].text;
-          if (item.tokens[0].tokens && item.tokens[0].tokens.length > 0 && item.tokens[0].tokens[0].type === 'text') {
-            item.tokens[0].tokens[0].text = checkbox + ' ' + escape(item.tokens[0].tokens[0].text);
+          item.tokens[0].text = `${checkbox}${item.tokens[0].text}`;
+          if (item.tokens[0]?.tokens?.length && item.tokens[0].tokens[0].type === 'text') {
+            item.tokens[0].tokens[0].text = `${checkbox}${escape(item.tokens[0].tokens[0].text)}`;
             item.tokens[0].tokens[0].escaped = true;
           }
         } else {
           item.tokens.unshift({
             type: 'text',
-            raw: checkbox + ' ',
-            text: checkbox + ' ',
+            raw: checkbox,
+            text: checkbox,
             escaped: true,
           });
         }
-      } else {
-        itemBody += checkbox + ' ';
-      }
+      } 
     }
-
-    itemBody += this.parser.parse(item.tokens, !!item.loose);
-
-    return `<li>${itemBody}</li>\n`;
+    
+    return `<li>${
+      (checkbox && !item.loose) ? checkbox : ""
+    }${
+      this.parser.parse(item.tokens, Boolean(item.loose))
+    }</li>\n`;
   }
 
   checkbox({ checked }: Tokens.Checkbox): string {
@@ -108,38 +97,25 @@ export class _Renderer {
   }
 
   paragraph({ tokens }: Tokens.Paragraph): string {
-    return `<p>${this.parser.parseInline(tokens)}</p>\n`;
+    return `<p>${
+      this.parser.parseInline(tokens)
+    }</p>\n`;
   }
 
   table(token: Tokens.Table): string {
-    let header = '';
-
-    // header
-    let cell = '';
-    for (let j = 0; j < token.header.length; j++) {
-      cell += this.tablecell(token.header[j]);
-    }
-    header += this.tablerow({ text: cell });
-
-    let body = '';
-    for (let j = 0; j < token.rows.length; j++) {
-      const row = token.rows[j];
-
-      cell = '';
-      for (let k = 0; k < row.length; k++) {
-        cell += this.tablecell(row[k]);
-      }
-
-      body += this.tablerow({ text: cell });
-    }
-    if (body) body = `<tbody>${body}</tbody>`;
-
-    return '<table>\n'
-      + '<thead>\n'
-      + header
-      + '</thead>\n'
-      + body
-      + '</table>\n';
+    const body = token.rows.map(row =>
+      this.tablerow({ text: this.tablecell(row) })
+    ).join("");
+    
+    return `<table>\n<thead>\n${
+      this.tablerow({ 
+              text: token.header.map(
+                this.tablecell
+              ).join("") 
+            })
+      }\n</thead>\n${
+      body ? `<tbody>${body}</tbody>` : ""
+      }\n</table>\n`;
   }
 
   tablerow({ text }: Tokens.TableRow): string {
@@ -147,19 +123,19 @@ export class _Renderer {
   }
 
   tablecell(token: Tokens.TableCell): string {
-    const content = this.parser.parseInline(token.tokens);
     const type = token.header ? 'th' : 'td';
-    const tag = token.align
+    return `${token.align
       ? `<${type} align="${token.align}">`
-      : `<${type}>`;
-    return tag + content + `</${type}>\n`;
+      : `<${type}>`}${this.parser.parseInline(token.tokens)}</${type}>\n`;
   }
 
   /**
    * span level renderer
    */
   strong({ tokens }: Tokens.Strong): string {
-    return `<strong>${this.parser.parseInline(tokens)}</strong>`;
+    return `<strong>${
+      this.parser.parseInline(tokens)
+    }</strong>`;
   }
 
   em({ tokens }: Tokens.Em): string {
@@ -175,42 +151,33 @@ export class _Renderer {
   }
 
   del({ tokens }: Tokens.Del): string {
-    return `<del>${this.parser.parseInline(tokens)}</del>`;
+    return `<del>${
+      this.parser.parseInline(tokens)
+    }</del>`;
   }
 
   link({ href, title, tokens }: Tokens.Link): string {
-    const text = this.parser.parseInline(tokens);
     const cleanHref = cleanUrl(href);
-    if (cleanHref === null) {
-      return text;
-    }
-    href = cleanHref;
-    let out = '<a href="' + href + '"';
-    if (title) {
-      out += ' title="' + (escape(title)) + '"';
-    }
-    out += '>' + text + '</a>';
-    return out;
+    return cleanHref === null 
+      ? escape(text) 
+      : `<a href="${cleanHref}"${title ? ` title="${escape(title)}"` : ""}>${
+        this.parser.parseInline(tokens)
+      }</a>`;
+
   }
 
   image({ href, title, text }: Tokens.Image): string {
     const cleanHref = cleanUrl(href);
-    if (cleanHref === null) {
-      return escape(text);
-    }
-    href = cleanHref;
-
-    let out = `<img src="${href}" alt="${text}"`;
-    if (title) {
-      out += ` title="${escape(title)}"`;
-    }
-    out += '>';
-    return out;
+    return cleanHref === null 
+      ? escape(text) 
+      : `<img src="${cleanHref}" alt="${text}"${title ? ` title="${escape(title)}"` : ""}>`;
   }
 
   text(token: Tokens.Text | Tokens.Escape) : string {
     return 'tokens' in token && token.tokens
       ? this.parser.parseInline(token.tokens)
-      : ('escaped' in token && token.escaped ? token.text : escape(token.text));
+      : ('escaped' in token && token.escaped 
+         ? token.text 
+         : escape(token.text));
   }
 }
