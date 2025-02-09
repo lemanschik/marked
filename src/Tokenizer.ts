@@ -830,8 +830,8 @@ export class _Tokenizer {
   }
 
   url(src: string): Tokens.Link | undefined {
-    let cap;
-    if (cap = this.rules.inline.url.exec(src)) {
+    let cap = this.rules.inline.url.exec(src);
+    if (cap) {
       let text, href;
       if (cap[2] === '@') {
         text = cap[0];
