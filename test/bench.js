@@ -2,7 +2,7 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { htmlIsEqual, getTests } from '@markedjs/testutils';
 
-import { marked as cjsMarked } from '../lib/marked.cjs';
+import { marked as cjsMarked } from '../dist/marked.cjs';
 import { marked as esmMarked } from '../lib/marked.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
