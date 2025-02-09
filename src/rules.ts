@@ -1,3 +1,5 @@
+/* eslint-disable no-useless-escape */
+/* eslint-disable no-control-regex */
 const noopTest = { exec: () => null } as unknown as RegExp;
 
 function edit(regex: string | RegExp, opt = '') {

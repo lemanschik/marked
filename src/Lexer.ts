@@ -1,3 +1,4 @@
+/* eslint-disable no-cond-assign */
 import { _Tokenizer } from './Tokenizer.js';
 import { _defaults } from './defaults.js';
 import { other, block, inline } from './rules.js';
@@ -112,18 +113,19 @@ export class _Lexer {
       let token: Tokens.Generic | undefined;
 
       if (this.options.extensions?.block?.some((extTokenizer) => {
-        if (token = extTokenizer.call({ lexer: this }, src, tokens)) {
+        token = extTokenizer.call({ lexer: this }, src, tokens);
+        if (token) {
           src = src.substring(token.raw.length);
           tokens.push(token);
-          return true;
         }
-        return false;
+        return Boolean(token);
       })) {
         continue;
       }
 
       // newline
-      if (token = this.tokenizer.space(src)) {
+      token = this.tokenizer.space(src);
+      if (token) {
         src = src.substring(token.raw.length);
         const lastToken = tokens.at(-1);
         if (token.raw.length === 1 && lastToken !== undefined) {
