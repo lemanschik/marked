@@ -72,7 +72,7 @@
     "build:docs": "npm run build && node docs/build.js",
     "build:man": "marked-man man/marked.1.md > man/marked.1",
     "build:reset": "git checkout upstream/master lib/marked.cjs lib/marked.umd.js lib/marked.esm.js marked.min.js",
-    "build:types": "tsc -p tsconfig.json",
+    "build:types": "tsc -p src",
     "lint": "eslint --fix",
     "rules": "node test/rules.js",
     "test": "npm run build && npm run test:specs && npm run test:unit",
