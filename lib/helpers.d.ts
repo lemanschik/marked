@@ -1,6 +1,6 @@
-export declare function escape(html: string, encode?: boolean): string;
-export declare function unescape(html: string): string;
-export declare function cleanUrl(href: string): string;
+export declare function escape(html?: string, encode?: boolean): string;
+export declare function unescape(html?: string): string;
+export declare const cleanUrl: (href?: string) => string;
 export declare function splitCells(tableRow: string, count?: number): string[];
 /**
  * Remove trailing 'c's. Equivalent to str.replace(/c*$/, '').
