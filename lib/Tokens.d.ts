@@ -1,3 +1,294 @@
+export declare const ListItem: (params: {
+    raw: string;
+    task: boolean;
+    loose: boolean;
+    text: string;
+    tokens: Token[];
+    checked?: boolean;
+}) => {
+    raw: string;
+    task: boolean;
+    loose: boolean;
+    text: string;
+    tokens: Token[];
+    checked?: boolean;
+    type: string;
+};
+export declare const TableCell: (params: {
+    text: string;
+    tokens: Token[];
+    header: boolean;
+    align: "center" | "left" | "right" | null;
+}) => {
+    text: string;
+    tokens: Token[];
+    header: boolean;
+    align: "center" | "left" | "right" | null;
+};
+export declare const Links: () => {};
+export declare const TokensList: (params: {
+    links: Links;
+    tokens: Token[];
+}) => Token[] & {
+    links: Links;
+};
+export declare const nsTokens: {
+    ListItem: (params: {
+        raw: string;
+        task: boolean;
+        loose: boolean;
+        text: string;
+        tokens: Token[];
+        checked?: boolean;
+    }) => {
+        raw: string;
+        task: boolean;
+        loose: boolean;
+        text: string;
+        tokens: Token[];
+        checked?: boolean;
+        type: string;
+    };
+    TableCell: (params: {
+        text: string;
+        tokens: Token[];
+        header: boolean;
+        align: "center" | "left" | "right" | null;
+    }) => {
+        text: string;
+        tokens: Token[];
+        header: boolean;
+        align: "center" | "left" | "right" | null;
+    };
+    Blockquote(params: {
+        raw: string;
+        text: string;
+        tokens: Token[];
+    }): {
+        raw: string;
+        text: string;
+        tokens: Token[];
+        type: string;
+    };
+    Br(params: {
+        raw: string;
+    }): {
+        raw: string;
+        type: string;
+    };
+    Checkbox(params: {
+        checked: boolean;
+    }): {
+        checked: boolean;
+    };
+    Code(params: {
+        raw: string;
+        text: string;
+        lang?: string;
+        codeBlockStyle?: "indented";
+        escaped?: boolean;
+    }): {
+        raw: string;
+        text: string;
+        lang?: string;
+        codeBlockStyle?: "indented";
+        escaped?: boolean;
+        type: string;
+    };
+    Codespan(params: {
+        raw: string;
+        text: string;
+    }): {
+        raw: string;
+        text: string;
+        type: string;
+    };
+    Def(params: {
+        raw: string;
+        tag: string;
+        href: string;
+        title: string;
+    }): {
+        raw: string;
+        tag: string;
+        href: string;
+        title: string;
+        type: string;
+    };
+    Del(params: {
+        raw: string;
+        text: string;
+        tokens: Token[];
+    }): {
+        raw: string;
+        text: string;
+        tokens: Token[];
+        type: string;
+    };
+    Em(params: {
+        raw: string;
+        text: string;
+        tokens: Token[];
+    }): {
+        raw: string;
+        text: string;
+        tokens: Token[];
+        type: string;
+    };
+    Escape(params: {
+        raw: string;
+        text: string;
+    }): {
+        raw: string;
+        text: string;
+        type: string;
+    };
+    Generic(params: {
+        type: string;
+        raw: string;
+        tokens?: Token[];
+    }): {
+        type: string;
+        raw: string;
+        tokens?: Token[];
+    };
+    Heading(params: {
+        raw: string;
+        depth: number;
+        text: string;
+        tokens: Token[];
+    }): {
+        raw: string;
+        depth: number;
+        text: string;
+        tokens: Token[];
+        type: string;
+    };
+    Hr(params: {
+        raw: string;
+    }): {
+        raw: string;
+        type: string;
+    };
+    HTML(params: {
+        raw: string;
+        pre: boolean;
+        text: string;
+        block: boolean;
+    }): {
+        raw: string;
+        pre: boolean;
+        text: string;
+        block: boolean;
+        type: string;
+    };
+    Image(params: {
+        raw: string;
+        href: string;
+        title: string | null;
+        text: string;
+    }): {
+        raw: string;
+        href: string;
+        title: string | null;
+        text: string;
+        type: string;
+    };
+    Link(params: {
+        raw: string;
+        href: string;
+        text: string;
+        tokens: Token[];
+        title?: string | null;
+    }): {
+        raw: string;
+        href: string;
+        text: string;
+        tokens: Token[];
+        title?: string | null;
+        type: string;
+    };
+    List(params: {
+        raw: string;
+        ordered: boolean;
+        start: number | "";
+        loose: boolean;
+        items: ReturnType<typeof ListItem>[];
+    }): {
+        raw: string;
+        ordered: boolean;
+        start: number | "";
+        loose: boolean;
+        items: ReturnType<typeof ListItem>[];
+        type: string;
+    };
+    Paragraph(params: {
+        raw: string;
+        text: string;
+        tokens: Token[];
+        pre?: boolean;
+    }): {
+        raw: string;
+        text: string;
+        tokens: Token[];
+        pre?: boolean;
+        type: string;
+    };
+    Space(params: {
+        raw: string;
+    }): {
+        raw: string;
+        type: string;
+    };
+    Strong(params: {
+        raw: string;
+        text: string;
+        tokens: Token[];
+    }): {
+        raw: string;
+        text: string;
+        tokens: Token[];
+        type: string;
+    };
+    Table(params: {
+        raw: string;
+        align: Array<"center" | "left" | "right" | null>;
+        header: ReturnType<typeof TableCell>[];
+        rows: ReturnType<typeof TableCell>[][];
+    }): {
+        raw: string;
+        align: Array<"center" | "left" | "right" | null>;
+        header: ReturnType<typeof TableCell>[];
+        rows: ReturnType<typeof TableCell>[][];
+        type: string;
+    };
+    Tag(params: {
+        raw: string;
+        inLink: boolean;
+        inRawBlock: boolean;
+        text: string;
+        block: boolean;
+    }): {
+        raw: string;
+        inLink: boolean;
+        inRawBlock: boolean;
+        text: string;
+        block: boolean;
+        type: string;
+    };
+    Text(params: {
+        raw: string;
+        text: string;
+        tokens?: Token[];
+        escaped?: boolean;
+    }): {
+        raw: string;
+        text: string;
+        tokens?: Token[];
+        escaped?: boolean;
+        type: string;
+    };
+};
 export type MarkedToken = (Tokens.Blockquote | Tokens.Br | Tokens.Code | Tokens.Codespan | Tokens.Def | Tokens.Del | Tokens.Em | Tokens.Escape | Tokens.Heading | Tokens.Hr | Tokens.HTML | Tokens.Image | Tokens.Link | Tokens.List | Tokens.ListItem | Tokens.Paragraph | Tokens.Space | Tokens.Strong | Tokens.Table | Tokens.Tag | Tokens.Text);
 export type Token = (MarkedToken | Tokens.Generic);
 export declare namespace Tokens {

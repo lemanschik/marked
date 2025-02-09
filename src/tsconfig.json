@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "isolatedModules": true,
+    "strict": false,
+    "verbatimModuleSyntax": true,
+    "noEmit": false,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "allowImportingTsExtensions": false,
+    "sourceMap": false,
+    "declaration": true,
+    "composite": true,
+    "outDir": "../lib",
+  }
+}

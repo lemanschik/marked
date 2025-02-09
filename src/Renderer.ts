@@ -14,11 +14,11 @@ import type { _Parser } from './Parser.js';
 export class _Renderer {
   options: MarkedOptions;
   parser!: _Parser; // set by the parser
-  constructor(options?: MarkedOptions) {
-    this.options = options || _defaults;
+  constructor(options = _defaults) {
+    this.options = options;
   }
 
-  space(token: Tokens.Space): string {
+  space(_token: Tokens.Space): string {
     return '';
   }
 

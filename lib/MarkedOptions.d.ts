@@ -37,7 +37,7 @@ type TokenizerApi = Omit<_Tokenizer, 'constructor' | 'options' | 'rules' | 'lexe
 type TokenizerObject = {
     [K in keyof TokenizerApi]?: (this: _Tokenizer, ...args: Parameters<TokenizerApi[K]>) => ReturnType<TokenizerApi[K]> | false;
 };
-export interface MarkedExtension {
+export interface sharedOptionsExtension {
     /**
      * True will tell marked to await any walkTokens functions before parsing the tokens and returning an HTML string.
      */
@@ -47,13 +47,23 @@ export interface MarkedExtension {
      */
     breaks?: boolean;
     /**
-     * Add tokenizers and renderers to marked
-     */
-    extensions?: TokenizerAndRendererExtension[] | null;
-    /**
      * Enable GitHub flavored markdown.
      */
     gfm?: boolean;
+    /**
+     * Conform to obscure parts of markdown.pl as much as possible. Don't fix any of the original markdown bugs or poor behavior.
+     */
+    pedantic?: boolean;
+    /**
+     * Shows an HTML error message when rendering fails.
+     */
+    silent?: boolean;
+}
+export interface MarkedExtension extends sharedOptionsExtension {
+    /**
+     * Add tokenizers and renderers to marked
+     */
+    extensions?: TokenizerAndRendererExtension[] | null;
     /**
      * Hooks are methods that hook into some part of marked.
      * preprocess is called to process markdown before sending it to marked.
@@ -64,19 +74,11 @@ export interface MarkedExtension {
      */
     hooks?: HooksObject | null;
     /**
-     * Conform to obscure parts of markdown.pl as much as possible. Don't fix any of the original markdown bugs or poor behavior.
-     */
-    pedantic?: boolean;
-    /**
      * Type: object Default: new Renderer()
      *
      * An object containing functions to render tokens to HTML.
      */
     renderer?: RendererObject | null;
-    /**
-     * Shows an HTML error message when rendering fails.
-     */
-    silent?: boolean;
     /**
      * The tokenizer defines how to turn markdown text into tokens.
      */
@@ -89,7 +91,7 @@ export interface MarkedExtension {
      */
     walkTokens?: ((token: Token) => void | Promise<void>) | null;
 }
-export interface MarkedOptions extends Omit<MarkedExtension, 'hooks' | 'renderer' | 'tokenizer' | 'extensions' | 'walkTokens'> {
+export interface MarkedOptions extends sharedOptionsExtension {
     /**
      * Hooks are methods that hook into some part of marked.
      */

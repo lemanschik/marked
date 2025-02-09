@@ -8,7 +8,7 @@ export declare class _Renderer {
     options: MarkedOptions;
     parser: _Parser;
     constructor(options?: MarkedOptions);
-    space(token: Tokens.Space): string;
+    space(_token: Tokens.Space): string;
     code({ text, lang, escaped }: Tokens.Code): string;
     blockquote({ tokens }: Tokens.Blockquote): string;
     html({ text }: Tokens.HTML | Tokens.Tag): string;
