@@ -9,7 +9,7 @@ import { promises } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { homedir } from 'node:os';
 import { createRequire } from 'node:module';
-import { marked } from '../lib/marked.esm.js';
+import { marked } from '../lib/marked.js';
 
 const { access, readFile, writeFile } = promises;
 const require = createRequire(import.meta.url);

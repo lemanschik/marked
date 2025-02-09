@@ -1,4 +1,4 @@
-import type { MarkedOptions } from './MarkedOptions.ts';
+import type { MarkedOptions } from './MarkedOptions.js';
 
 /**
  * Gets the original marked default options.

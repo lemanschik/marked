@@ -1,9 +1,9 @@
-import type { Token, Tokens, TokensList } from './Tokens.ts';
-import type { _Parser } from './Parser.ts';
-import type { _Lexer } from './Lexer.ts';
-import type { _Renderer } from './Renderer.ts';
-import type { _Tokenizer } from './Tokenizer.ts';
-import type { _Hooks } from './Hooks.ts';
+import type { Token, Tokens, TokensList } from './Tokens.js';
+import type { _Parser } from './Parser.js';
+import type { _Lexer } from './Lexer.js';
+import type { _Renderer } from './Renderer.js';
+import type { _Tokenizer } from './Tokenizer.js';
+import type { _Hooks } from './Hooks.js';
 
 export interface TokenizerThis {
   lexer: _Lexer;

@@ -1,8 +1,8 @@
-import { _Tokenizer } from './Tokenizer.ts';
-import { _defaults } from './defaults.ts';
-import { other, block, inline } from './rules.ts';
-import type { Token, TokensList, Tokens } from './Tokens.ts';
-import type { MarkedOptions } from './MarkedOptions.ts';
+import { _Tokenizer } from './Tokenizer.js';
+import { _defaults } from './defaults.js';
+import { other, block, inline } from './rules.js';
+import type { Token, TokensList, Tokens } from './Tokens.js';
+import type { MarkedOptions } from './MarkedOptions.js';
 
 /**
  * Block Lexer

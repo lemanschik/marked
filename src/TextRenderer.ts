@@ -1,4 +1,4 @@
-import type { Tokens } from './Tokens.ts';
+import type { Tokens } from './Tokens.js';
 
 /**
  * TextRenderer

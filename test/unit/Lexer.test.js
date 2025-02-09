@@ -1,4 +1,4 @@
-import { Lexer } from '../../lib/marked.esm.js';
+import { Lexer } from '../../lib/marked.js';
 import { describe, it } from 'node:test';
 import assert from 'node:assert';
 

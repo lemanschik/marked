@@ -3,7 +3,7 @@ import { join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { load } from 'cheerio';
 import { htmlIsEqual } from '@markedjs/testutils';
-import { Marked } from '../lib/marked.esm.js';
+import { Marked } from '../lib/marked.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 

@@ -1,13 +1,13 @@
-import { _getDefaults } from './defaults.ts';
-import { _Lexer } from './Lexer.ts';
-import { _Parser } from './Parser.ts';
-import { _Hooks } from './Hooks.ts';
-import { _Renderer } from './Renderer.ts';
-import { _Tokenizer } from './Tokenizer.ts';
-import { _TextRenderer } from './TextRenderer.ts';
-import { escape } from './helpers.ts';
-import type { MarkedExtension, MarkedOptions } from './MarkedOptions.ts';
-import type { Token, Tokens, TokensList } from './Tokens.ts';
+import { _getDefaults } from './defaults.js';
+import { _Lexer } from './Lexer.js';
+import { _Parser } from './Parser.js';
+import { _Hooks } from './Hooks.js';
+import { _Renderer } from './Renderer.js';
+import { _Tokenizer } from './Tokenizer.js';
+import { _TextRenderer } from './TextRenderer.js';
+import { escape } from './helpers.js';
+import type { MarkedExtension, MarkedOptions } from './MarkedOptions.js';
+import type { Token, Tokens, TokensList } from './Tokens.js';
 
 export type MaybePromise = void | Promise<void>;
 
@@ -78,7 +78,7 @@ export class Marked {
 
     args.forEach((pack) => {
       // copy options to new object
-      const opts = { ...pack } as MarkedOptions;
+      const opts = { ...pack } as unknown as MarkedOptions;
 
       // set async to true if it was set to true before
       opts.async = this.defaults.async || opts.async || false;
@@ -176,7 +176,6 @@ export class Marked {
           const tokenizerFunc = pack.tokenizer[tokenizerProp] as UnknownFunction;
           const prevTokenizer = tokenizer[tokenizerProp] as UnknownFunction;
           // Replace tokenizer with func to run extension, but fall back if false
-          // @ts-expect-error cannot type tokenizer function dynamically
           tokenizer[tokenizerProp] = (...args: unknown[]) => {
             let ret = tokenizerFunc.apply(tokenizer, args);
             if (ret === false) {
@@ -215,7 +214,6 @@ export class Marked {
               return prevHook.call(hooks, ret);
             };
           } else {
-            // @ts-expect-error cannot type hook function dynamically
             hooks[hooksProp] = (...args: unknown[]) => {
               let ret = hooksFunc.apply(hooks, args);
               if (ret === false) {

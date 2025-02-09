@@ -1,4 +1,4 @@
-import { other } from './rules.ts';
+import { other } from './rules.js';
 
 /**
  * Helpers

@@ -1,8 +1,8 @@
-import { _Renderer } from './Renderer.ts';
-import { _TextRenderer } from './TextRenderer.ts';
-import { _defaults } from './defaults.ts';
-import type { MarkedToken, Token, Tokens } from './Tokens.ts';
-import type { MarkedOptions } from './MarkedOptions.ts';
+import { _Renderer } from './Renderer.js';
+import { _TextRenderer } from './TextRenderer.js';
+import { _defaults } from './defaults.js';
+import type { MarkedToken, Token, Tokens } from './Tokens.js';
+import type { MarkedOptions } from './MarkedOptions.js';
 
 /**
  * Parsing & Compiling

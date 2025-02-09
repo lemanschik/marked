@@ -1,4 +1,4 @@
-import { Marked, Renderer, lexer, parseInline, getDefaults, walkTokens, defaults, setOptions } from '../../lib/marked.esm.js';
+import { Marked, Renderer, lexer, parseInline, getDefaults, walkTokens, defaults, setOptions } from '../../lib/marked.js';
 import { timeout } from './utils.js';
 import assert from 'node:assert';
 import { describe, it, beforeEach, mock } from 'node:test';
@@ -24,10 +24,10 @@ describe('marked unit', () => {
 
   describe('changeDefaults', () => {
     it('should change global defaults', async() => {
-      const { defaults, setOptions } = await import('../../lib/marked.esm.js');
+      const { defaults, setOptions } = await import('../../lib/marked.js');
       assert.ok(!defaults.test);
       setOptions({ test: true });
-      assert.ok((await import('../../lib/marked.esm.js')).defaults.test);
+      assert.ok((await import('../../lib/marked.js')).defaults.test);
     });
   });
 

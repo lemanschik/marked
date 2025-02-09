@@ -1,15 +1,19 @@
 {
   "compilerOptions": {
-    "target": "es2022",
+    "rootDir": "src",
+    "target": "ESNext",
     "module": "ESNext",
     "isolatedModules": true,
-    "strict": true,
+    "strict": false,
     "verbatimModuleSyntax": true,
-    "noEmit": true,
+    "noEmit": false,
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
-    "allowImportingTsExtensions": true,
-    "sourceMap": false
+    "allowImportingTsExtensions": false,
+    "sourceMap": false,
+    "declaration": true,
+    "composite": true,
+    "outDir": "lib"
   },
   "include": [
     "src/*.ts"

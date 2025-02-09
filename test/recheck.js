@@ -1,4 +1,4 @@
-import { Lexer } from '../lib/marked.esm.js';
+import { Lexer } from '../lib/marked.js';
 import { check } from 'recheck';
 
 const { inline, block } = Lexer.rules;
@@ -27,7 +27,7 @@ function checkRegexp(obj, name) {
 }
 
 console.log(`
-import { marked } from '../lib/marked.esm.js';
+import { marked } from '../lib/marked.js';
 
 const start = Date.now();
 `);

@@ -1,4 +1,4 @@
-import { Marked } from '../lib/marked.esm.js';
+import { Marked } from '../lib/marked.js';
 import { getTests, runTests, outputCompletionTable } from '@markedjs/testutils';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';

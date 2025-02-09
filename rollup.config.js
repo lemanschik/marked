@@ -1,15 +1,25 @@
-import typescript from '@rollup/plugin-typescript';
+// tsc -p .\tsconfig.json => src => lib
+/**
+ * The rollup file is additional it produces 
+ * ./dist with the already known builds
+ * as typescript got deprecated 
+ * this now directly ships lib and only 
+ * has the tssrc as reference to optimize 
+ * type output.
+ */
 import terser from '@rollup/plugin-terser';
 import { defineConfig } from 'rollup';
-import fs from 'fs';
 
-const version = process.env.SEMANTIC_RELEASE_NEXT_VERSION || JSON.parse(fs.readFileSync('./package.json')).version;
+import pkg from './package.json' with { type: 'json' };
+
+const version = (process && process?.env?.SEMANTIC_RELEASE_NEXT_VERSION) || pkg.version;
 
 console.log('building version:', version);
 
 const banner = `/**
  * marked v${version} - a markdown parser
- * Copyright (c) 2011-${new Date().getFullYear()}, Christopher Jeffrey. (MIT Licensed)
+ * Copyright (c) 2011-${new Date().getFullYear()}, 
+ * Christopher Jeffrey. (MIT Licensed)
  * https://github.com/markedjs/marked
  */
 
@@ -21,45 +31,29 @@ const banner = `/**
 
 export default defineConfig([
   {
-    input: 'src/marked.ts',
-    output: [{
-      file: 'lib/marked.esm.js',
-      format: 'esm',
-      sourcemap: true,
-      banner,
-    },
-    {
-      file: 'lib/marked.umd.js',
-      format: 'umd',
-      name: 'marked',
-      sourcemap: true,
-      banner,
-    },
-    {
-      file: 'marked.min.js',
-      format: 'umd',
-      name: 'marked',
-      sourcemap: false,
-      banner,
-      plugins: [terser({
-        format: {
-          comments: (node, comment) => {
-            if (comment.type === 'comment2') {
-              return comment.value.includes('Copyright (c)');
-            }
-          },
-        },
-      })],
-    },
-    {
-      file: 'lib/marked.cjs',
-      format: 'cjs',
-      name: 'marked',
-      sourcemap: true,
-      banner,
-    }],
-    plugins: [
-      typescript(),
+    input: 'lib/marked.js',
+    output: [
+      { file: 'dist/marked.esm.js', format: 'esm', sourcemap: true, banner },
+      { file: 'dist/marked.umd.js', format: 'umd', name: 'marked', sourcemap: true, banner },
+      {
+        file: 'dist/marked.min.js',
+        format: 'umd',
+        name: 'marked',
+        sourcemap: false,
+        banner,
+        plugins: [
+          terser({
+            format: {
+              comments: (node, comment) => {
+                if (comment.type === 'comment2') {
+                  return comment.value.includes('Copyright (c)');
+                }
+              },
+            },
+          }),
+        ],
+      },
+      { file: 'dist/marked.cjs', format: 'cjs', name: 'marked', sourcemap: true, banner },
     ],
   },
 ]);

@@ -1,4 +1,4 @@
-import { marked, Marked, Renderer, Tokenizer, Hooks } from '../../lib/marked.esm.js';
+import { marked, Marked, Renderer, Tokenizer, Hooks } from '../../lib/marked.js';
 import { describe, it, beforeEach } from 'node:test';
 import assert from 'node:assert';
 

@@ -1,4 +1,4 @@
-import { Lexer } from '../lib/marked.esm.js';
+import { Lexer } from '../lib/marked.js';
 const rules = Lexer.rules;
 
 const COLOR = {

@@ -1,13 +1,13 @@
-import { _defaults } from './defaults.ts';
+import { _defaults } from './defaults.js';
 import {
   rtrim,
   splitCells,
   findClosingBracket,
-} from './helpers.ts';
-import type { Rules } from './rules.ts';
-import type { _Lexer } from './Lexer.ts';
-import type { Links, Tokens, Token } from './Tokens.ts';
-import type { MarkedOptions } from './MarkedOptions.ts';
+} from './helpers.js';
+import type { Rules } from './rules.js';
+import type { _Lexer } from './Lexer.js';
+import type { Links, Tokens, Token } from './Tokens.js';
+import type { MarkedOptions } from './MarkedOptions.js';
 
 function outputLink(cap: string[], link: Pick<Tokens.Link, 'href' | 'title'>, raw: string, lexer: _Lexer, rules: Rules): Tokens.Link | Tokens.Image {
   const href = link.href;
