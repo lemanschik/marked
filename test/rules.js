@@ -1,4 +1,4 @@
-import { Lexer } from '../lib/marked.js';
+import { Lexer } from 'marked-src/lib/marked.js';
 const rules = Lexer.rules;
 
 const COLOR = {

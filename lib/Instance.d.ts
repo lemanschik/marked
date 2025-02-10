@@ -8,7 +8,18 @@ import type { MarkedExtension, MarkedOptions } from './MarkedOptions.js';
 import type { Token, TokensList } from './Tokens.js';
 export type MaybePromise = void | Promise<void>;
 export declare class Marked {
-    defaults: MarkedOptions;
+    defaults: {
+        async: boolean;
+        breaks: boolean;
+        extensions: any;
+        gfm: boolean;
+        hooks: any;
+        pedantic: boolean;
+        renderer: any;
+        silent: boolean;
+        tokenizer: any;
+        walkTokens: any;
+    };
     options: (opt: MarkedOptions) => this;
     parse: {
         (src: string, options: MarkedOptions & {

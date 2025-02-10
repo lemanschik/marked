@@ -1,4 +1,4 @@
-import { Marked } from '../lib/marked.js';
+import { Marked } from 'marked-src/lib/marked.js';
 import { getTests, runTests, outputCompletionTable } from '@markedjs/testutils';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';

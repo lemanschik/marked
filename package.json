@@ -1,5 +1,6 @@
 {
-  "name": "marked",
+  "name": "marked-src",
+  "workspaces":["packages/**/*","."],
   "description": "A markdown parser built for speed",
   "author": "Christopher Jeffrey",
   "version": "15.1.0",
@@ -14,8 +15,8 @@
   "man": "./man/marked.1",
   "files": [
     "bin/",
-    "lib/",
-    "man/"
+    "man/",
+    "dist"
   ],
   "publishConfig": {
     "provenance": true
@@ -57,7 +58,6 @@
     "highlight.js": "^11.11.1",
     "markdown-it": "14.1.0",
     "marked-highlight": "^2.2.1",
-    "marked-man": "^2.1.0",
     "recheck": "^4.4.5",
     "rollup": "^4.34.1",
     "semantic-release": "^24.2.1",
@@ -68,7 +68,7 @@
   },
   "scripts": {
     "bench": "npm run build && node test/bench.js",
-    "build": "rollup -c rollup.config.js && npm run build:man",
+    "build": "tsc -p src && rollup -c rollup.config.js && npm run build:man",
     "build:docs": "npm run build && node docs/build.js",
     "build:man": "marked-man man/marked.1.md > man/marked.1",
     "build:reset": "git checkout upstream/master lib/marked.cjs lib/marked.umd.js lib/marked.esm.js marked.min.js",

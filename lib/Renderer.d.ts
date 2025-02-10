@@ -7,7 +7,18 @@ import type { _Parser } from './Parser.js';
 export declare class _Renderer {
     options: MarkedOptions;
     parser: _Parser;
-    constructor(options?: MarkedOptions);
+    constructor(options?: {
+        async: boolean;
+        breaks: boolean;
+        extensions: any;
+        gfm: boolean;
+        hooks: any;
+        pedantic: boolean;
+        renderer: any;
+        silent: boolean;
+        tokenizer: any;
+        walkTokens: any;
+    });
     space(_token: Tokens.Space): string;
     code({ text, lang, escaped }: Tokens.Code): string;
     blockquote({ tokens }: Tokens.Blockquote): string;

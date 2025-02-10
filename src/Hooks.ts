@@ -4,12 +4,15 @@ import { _Parser } from './Parser.js';
 import type { MarkedOptions } from './MarkedOptions.js';
 import type { Token, TokensList } from './Tokens.js';
 
+/**
+ * This is designed as extensible Hook Class
+ */
 export class _Hooks {
   options?: MarkedOptions;
   block?: boolean;
 
   constructor(options?: MarkedOptions) {
-    this.options = options || _defaults;
+    this.options = Object.assign({}, _defaults, options);
   }
 
   static passThroughHooks = new Set([

@@ -215,7 +215,7 @@ export class _Tokenizer {
           break;
         } else if (lastToken?.type === 'list') {
           // include continuation in nested list
-          const oldToken = lastToken as Tokens.List;
+          const oldToken = lastToken;
           const newText = oldToken.raw + '\n' + lines.join('\n');
           const newToken = this.list(newText)!;
           tokens[tokens.length - 1] = newToken;

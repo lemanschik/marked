@@ -1,4 +1,4 @@
-import { Lexer } from '../lib/marked.js';
+import { Lexer } from 'marked-src/lib/marked.js';
 import { check } from 'recheck';
 
 const { inline, block } = Lexer.rules;

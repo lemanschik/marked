@@ -36,7 +36,18 @@ export declare namespace marked {
     var options: (options: MarkedOptions) => typeof marked;
     var setOptions: (options: MarkedOptions) => typeof marked;
     var getDefaults: typeof _getDefaults;
-    var defaults: MarkedOptions;
+    var defaults: {
+        async: boolean;
+        breaks: boolean;
+        extensions: any;
+        gfm: boolean;
+        hooks: any;
+        pedantic: boolean;
+        renderer: any;
+        silent: boolean;
+        tokenizer: any;
+        walkTokens: any;
+    };
     var use: (...args: MarkedExtension[]) => typeof marked;
     var walkTokens: (tokens: Token[] | TokensList, callback: (token: Token) => MaybePromise | MaybePromise[]) => MaybePromise[];
     var parseInline: {

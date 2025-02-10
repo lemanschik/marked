@@ -2,6 +2,9 @@ import { _Lexer } from './Lexer.js';
 import { _Parser } from './Parser.js';
 import type { MarkedOptions } from './MarkedOptions.js';
 import type { Token, TokensList } from './Tokens.js';
+/**
+ * This is designed as extensible Hook Class
+ */
 export declare class _Hooks {
     options?: MarkedOptions;
     block?: boolean;

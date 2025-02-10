@@ -1,3 +1,190 @@
+/**
+ * @typedef {Object} Blockquote
+ * @property {'blockquote'} type
+ * @property {string} raw
+ * @property {string} text
+ * @property {Token[]} tokens
+ */
+/**
+ * @typedef {Object} Br
+ * @property {'br'} type
+ * @property {string} raw
+ */
+/**
+ * @typedef {Object} Checkbox
+ * @property {boolean} checked
+ */
+/**
+ * @typedef {Object} Code
+ * @property {'code'} type
+ * @property {string} raw
+ * @property {'indented'} [codeBlockStyle]
+ * @property {string} [lang]
+ * @property {string} text
+ * @property {boolean} [escaped]
+ */
+/**
+ * @typedef {Object} Codespan
+ * @property {'codespan'} type
+ * @property {string} raw
+ * @property {string} text
+ */
+/**
+ * @typedef {Object} Def
+ * @property {'def'} type
+ * @property {string} raw
+ * @property {string} tag
+ * @property {string} href
+ * @property {string} title
+ */
+/**
+ * @typedef {Object} Del
+ * @property {'del'} type
+ * @property {string} raw
+ * @property {string} text
+ * @property {Token[]} tokens
+ */
+/**
+ * @typedef {Object} Em
+ * @property {'em'} type
+ * @property {string} raw
+ * @property {string} text
+ * @property {Token[]} tokens
+ */
+/**
+ * @typedef {Object} Escape
+ * @property {'escape'} type
+ * @property {string} raw
+ * @property {string} text
+ */
+/**
+ * @typedef {Object} Generic
+ * @property {string} type
+ * @property {string} raw
+ * @property {Object.<string, any>} [index]
+ * @property {Token[]} [tokens]
+ */
+/**
+ * @typedef {Object} Heading
+ * @property {'heading'} type
+ * @property {string} raw
+ * @property {number} depth
+ * @property {string} text
+ * @property {Token[]} tokens
+ */
+/**
+ * @typedef {Object} Hr
+ * @property {'hr'} type
+ * @property {string} raw
+ */
+/**
+ * @typedef {Object} HTML
+ * @property {'html'} type
+ * @property {string} raw
+ * @property {boolean} pre
+ * @property {string} text
+ * @property {boolean} block
+ */
+/**
+ * @typedef {Object} Image
+ * @property {'image'} type
+ * @property {string} raw
+ * @property {string} href
+ * @property {string|null} title
+ * @property {string} text
+ */
+/**
+ * @typedef {Object} Link
+ * @property {'link'} type
+ * @property {string} raw
+ * @property {string} href
+ * @property {string|null} [title]
+ * @property {string} text
+ * @property {Token[]} tokens
+ */
+/**
+ * @typedef {Object} List
+ * @property {'list'} type
+ * @property {string} raw
+ * @property {boolean} ordered
+ * @property {number|string} start
+ * @property {boolean} loose
+ * @property {ListItem[]} items
+ */
+/**
+ * @typedef {Object} ListItem
+ * @property {'list_item'} type
+ * @property {string} raw
+ * @property {boolean} task
+ * @property {boolean} [checked]
+ * @property {boolean} loose
+ * @property {string} text
+ * @property {Token[]} tokens
+ */
+/**
+ * @typedef {Object} Paragraph
+ * @property {'paragraph'} type
+ * @property {string} raw
+ * @property {boolean} [pre]
+ * @property {string} text
+ * @property {Token[]} tokens
+ */
+/**
+ * @typedef {Object} Space
+ * @property {'space'} type
+ * @property {string} raw
+ */
+/**
+ * @typedef {Object} Strong
+ * @property {'strong'} type
+ * @property {string} raw
+ * @property {string} text
+ * @property {Token[]} tokens
+ */
+/**
+ * @typedef {Object} Table
+ * @property {'table'} type
+ * @property {string} raw
+ * @property {Array<'center' | 'left' | 'right' | null>} align
+ * @property {TableCell[]} header
+ * @property {TableCell[][]} rows
+ */
+/**
+ * @typedef {Object} TableCell
+ * @property {string} text
+ * @property {Token[]} tokens
+ * @property {boolean} header
+ * @property {'center' | 'left' | 'right' | null} align
+ */
+/**
+ * @typedef {Object} Tag
+ * @property {'html'} type
+ * @property {string} raw
+ * @property {boolean} inLink
+ * @property {boolean} inRawBlock
+ * @property {string} text
+ * @property {boolean} block
+ */
+/**
+ * @typedef {Object} Text
+ * @property {'text'} type
+ * @property {string} raw
+ * @property {string} text
+ * @property {Token[]} [tokens]
+ * @property {boolean} [escaped]
+ */
+/**
+ * @typedef {Blockquote | Br | Code | Codespan | Def | Del | Em | Escape | Heading | Hr | HTML | Image | Link | List | ListItem | Paragraph | Space | Strong | Table | Tag | Text} MarkedToken
+ */
+/**
+ * @typedef {MarkedToken | Generic} Token
+ */
+/**
+ * @typedef {Object.<string, {href: string, title: string|null}>} Links
+ */
+/**
+ * @typedef {Token[] & {links: Links}} TokensList
+ */
 export declare const ListItem: (params: {
     raw: string;
     task: boolean;
@@ -32,263 +219,12 @@ export declare const TokensList: (params: {
 }) => Token[] & {
     links: Links;
 };
-export declare const nsTokens: {
-    ListItem: (params: {
-        raw: string;
-        task: boolean;
-        loose: boolean;
-        text: string;
-        tokens: Token[];
-        checked?: boolean;
-    }) => {
-        raw: string;
-        task: boolean;
-        loose: boolean;
-        text: string;
-        tokens: Token[];
-        checked?: boolean;
-        type: string;
-    };
-    TableCell: (params: {
-        text: string;
-        tokens: Token[];
-        header: boolean;
-        align: "center" | "left" | "right" | null;
-    }) => {
-        text: string;
-        tokens: Token[];
-        header: boolean;
-        align: "center" | "left" | "right" | null;
-    };
-    Blockquote(params: {
-        raw: string;
-        text: string;
-        tokens: Token[];
-    }): {
-        raw: string;
-        text: string;
-        tokens: Token[];
-        type: string;
-    };
-    Br(params: {
-        raw: string;
-    }): {
-        raw: string;
-        type: string;
-    };
-    Checkbox(params: {
-        checked: boolean;
-    }): {
-        checked: boolean;
-    };
-    Code(params: {
-        raw: string;
-        text: string;
-        lang?: string;
-        codeBlockStyle?: "indented";
-        escaped?: boolean;
-    }): {
-        raw: string;
-        text: string;
-        lang?: string;
-        codeBlockStyle?: "indented";
-        escaped?: boolean;
-        type: string;
-    };
-    Codespan(params: {
-        raw: string;
-        text: string;
-    }): {
-        raw: string;
-        text: string;
-        type: string;
-    };
-    Def(params: {
-        raw: string;
-        tag: string;
-        href: string;
-        title: string;
-    }): {
-        raw: string;
-        tag: string;
-        href: string;
-        title: string;
-        type: string;
-    };
-    Del(params: {
-        raw: string;
-        text: string;
-        tokens: Token[];
-    }): {
-        raw: string;
-        text: string;
-        tokens: Token[];
-        type: string;
-    };
-    Em(params: {
-        raw: string;
-        text: string;
-        tokens: Token[];
-    }): {
-        raw: string;
-        text: string;
-        tokens: Token[];
-        type: string;
-    };
-    Escape(params: {
-        raw: string;
-        text: string;
-    }): {
-        raw: string;
-        text: string;
-        type: string;
-    };
-    Generic(params: {
-        type: string;
-        raw: string;
-        tokens?: Token[];
-    }): {
-        type: string;
-        raw: string;
-        tokens?: Token[];
-    };
-    Heading(params: {
-        raw: string;
-        depth: number;
-        text: string;
-        tokens: Token[];
-    }): {
-        raw: string;
-        depth: number;
-        text: string;
-        tokens: Token[];
-        type: string;
-    };
-    Hr(params: {
-        raw: string;
-    }): {
-        raw: string;
-        type: string;
-    };
-    HTML(params: {
-        raw: string;
-        pre: boolean;
-        text: string;
-        block: boolean;
-    }): {
-        raw: string;
-        pre: boolean;
-        text: string;
-        block: boolean;
-        type: string;
-    };
-    Image(params: {
-        raw: string;
-        href: string;
-        title: string | null;
-        text: string;
-    }): {
-        raw: string;
-        href: string;
-        title: string | null;
-        text: string;
-        type: string;
-    };
-    Link(params: {
-        raw: string;
-        href: string;
-        text: string;
-        tokens: Token[];
-        title?: string | null;
-    }): {
-        raw: string;
-        href: string;
-        text: string;
-        tokens: Token[];
-        title?: string | null;
-        type: string;
-    };
-    List(params: {
-        raw: string;
-        ordered: boolean;
-        start: number | "";
-        loose: boolean;
-        items: ReturnType<typeof ListItem>[];
-    }): {
-        raw: string;
-        ordered: boolean;
-        start: number | "";
-        loose: boolean;
-        items: ReturnType<typeof ListItem>[];
-        type: string;
-    };
-    Paragraph(params: {
-        raw: string;
-        text: string;
-        tokens: Token[];
-        pre?: boolean;
-    }): {
-        raw: string;
-        text: string;
-        tokens: Token[];
-        pre?: boolean;
-        type: string;
-    };
-    Space(params: {
-        raw: string;
-    }): {
-        raw: string;
-        type: string;
-    };
-    Strong(params: {
-        raw: string;
-        text: string;
-        tokens: Token[];
-    }): {
-        raw: string;
-        text: string;
-        tokens: Token[];
-        type: string;
-    };
-    Table(params: {
-        raw: string;
-        align: Array<"center" | "left" | "right" | null>;
-        header: ReturnType<typeof TableCell>[];
-        rows: ReturnType<typeof TableCell>[][];
-    }): {
-        raw: string;
-        align: Array<"center" | "left" | "right" | null>;
-        header: ReturnType<typeof TableCell>[];
-        rows: ReturnType<typeof TableCell>[][];
-        type: string;
-    };
-    Tag(params: {
-        raw: string;
-        inLink: boolean;
-        inRawBlock: boolean;
-        text: string;
-        block: boolean;
-    }): {
-        raw: string;
-        inLink: boolean;
-        inRawBlock: boolean;
-        text: string;
-        block: boolean;
-        type: string;
-    };
-    Text(params: {
-        raw: string;
-        text: string;
-        tokens?: Token[];
-        escaped?: boolean;
-    }): {
-        raw: string;
-        text: string;
-        tokens?: Token[];
-        escaped?: boolean;
-        type: string;
-    };
-};
+export declare class TokenTypes {
+    constructor({ type, raw }: {
+        type?: string;
+        raw?: string;
+    });
+}
 export type MarkedToken = (Tokens.Blockquote | Tokens.Br | Tokens.Code | Tokens.Codespan | Tokens.Def | Tokens.Del | Tokens.Em | Tokens.Escape | Tokens.Heading | Tokens.Hr | Tokens.HTML | Tokens.Image | Tokens.Link | Tokens.List | Tokens.ListItem | Tokens.Paragraph | Tokens.Space | Tokens.Strong | Tokens.Table | Tokens.Tag | Tokens.Text);
 export type Token = (MarkedToken | Tokens.Generic);
 export declare namespace Tokens {

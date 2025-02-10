@@ -1,8 +1,13 @@
 {
     "compilerOptions": {
-        "checkJs": true
+        "module": "ESNext",
+        "moduleResolution": "node",
+        "target": "ESNext",
+        "checkJs": false,
+        "allowJs": true,
+        "noImplicitAny": true
     },
     "references": [
-        { "path": "../src" }
+        { "path": "src" }
     ]
 }

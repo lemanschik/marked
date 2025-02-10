@@ -4,7 +4,7 @@ import { load } from 'cheerio';
 import { htmlIsEqual } from '@markedjs/testutils';
 import { Marked } from '../lib/marked.js';
 
-const fullpath = dir => file => join(dir, file);
+const fullpath = (dir = '') => (file = '') => join(dir, file);
 const removeFiles = dir => readdir(dir).then(
   files => Promise.all(files.map(fullpath(dir)).map(unlink)),
 ).then(() => dir);

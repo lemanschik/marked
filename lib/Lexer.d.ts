@@ -34,8 +34,8 @@ export declare class _Lexer {
                 table: RegExp;
                 text: RegExp;
             };
-            gfm: Record<"blockquote" | "code" | "def" | "heading" | "hr" | "html" | "list" | "paragraph" | "table" | "text" | "fences" | "lheading" | "newline", RegExp>;
-            pedantic: Record<"blockquote" | "code" | "def" | "heading" | "hr" | "html" | "list" | "paragraph" | "table" | "text" | "fences" | "lheading" | "newline", RegExp>;
+            gfm: Record<"hr" | "heading" | "blockquote" | "fences" | "list" | "html" | "paragraph" | "code" | "def" | "lheading" | "newline" | "table" | "text", RegExp>;
+            pedantic: Record<"hr" | "heading" | "blockquote" | "fences" | "list" | "html" | "paragraph" | "code" | "def" | "lheading" | "newline" | "table" | "text", RegExp>;
         };
         inline: {
             normal: {
@@ -59,9 +59,9 @@ export declare class _Lexer {
                 text: RegExp;
                 url: RegExp;
             };
-            gfm: Record<"br" | "code" | "del" | "escape" | "link" | "text" | "tag" | "reflink" | "nolink" | "_backpedal" | "anyPunctuation" | "autolink" | "blockSkip" | "emStrongLDelim" | "emStrongRDelimAst" | "emStrongRDelimUnd" | "punctuation" | "reflinkSearch" | "url", RegExp>;
-            breaks: Record<"br" | "code" | "del" | "escape" | "link" | "text" | "tag" | "reflink" | "nolink" | "_backpedal" | "anyPunctuation" | "autolink" | "blockSkip" | "emStrongLDelim" | "emStrongRDelimAst" | "emStrongRDelimUnd" | "punctuation" | "reflinkSearch" | "url", RegExp>;
-            pedantic: Record<"br" | "code" | "del" | "escape" | "link" | "text" | "tag" | "reflink" | "nolink" | "_backpedal" | "anyPunctuation" | "autolink" | "blockSkip" | "emStrongLDelim" | "emStrongRDelimAst" | "emStrongRDelimUnd" | "punctuation" | "reflinkSearch" | "url", RegExp>;
+            gfm: Record<"tag" | "code" | "text" | "reflink" | "nolink" | "_backpedal" | "anyPunctuation" | "autolink" | "blockSkip" | "br" | "del" | "emStrongLDelim" | "emStrongRDelimAst" | "emStrongRDelimUnd" | "escape" | "link" | "punctuation" | "reflinkSearch" | "url", RegExp>;
+            breaks: Record<"tag" | "code" | "text" | "reflink" | "nolink" | "_backpedal" | "anyPunctuation" | "autolink" | "blockSkip" | "br" | "del" | "emStrongLDelim" | "emStrongRDelimAst" | "emStrongRDelimUnd" | "escape" | "link" | "punctuation" | "reflinkSearch" | "url", RegExp>;
+            pedantic: Record<"tag" | "code" | "text" | "reflink" | "nolink" | "_backpedal" | "anyPunctuation" | "autolink" | "blockSkip" | "br" | "del" | "emStrongLDelim" | "emStrongRDelimAst" | "emStrongRDelimUnd" | "escape" | "link" | "punctuation" | "reflinkSearch" | "url", RegExp>;
         };
     };
     /**

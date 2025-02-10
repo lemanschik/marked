@@ -1,9 +1,14 @@
-import { marked } from '../lib/marked.esm.js';
+import { marked } from '../lib/marked.js';
 import pkg from '../package.json' with { type: 'json' };
 
 const version = pkg.version;
 const name = 'Marked';
-
+/**
+ * takes request ?text=* and returns { name: Marked, version. html}
+ * @param {*} req
+ * @param {*} res
+ * @returns
+ */
 export default function dingus(req, res) {
   if (req.method !== 'GET') {
     return res.status(405).json({

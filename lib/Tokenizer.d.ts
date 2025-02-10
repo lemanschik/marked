@@ -11,8 +11,18 @@ export declare class _Tokenizer {
     lexer: _Lexer;
     constructor(options?: MarkedOptions);
     space(src: string): Tokens.Space | undefined;
-    code(src: string): Tokens.Code | undefined;
-    fences(src: string): Tokens.Code | undefined;
+    code(src: string): {
+        type: string;
+        raw: string;
+        codeBlockStyle: string;
+        text: string;
+    };
+    fences(src: string): {
+        type: string;
+        raw: string;
+        lang: string;
+        text: string;
+    };
     heading(src: string): Tokens.Heading | undefined;
     hr(src: string): Tokens.Hr | undefined;
     blockquote(src: string): Tokens.Blockquote | undefined;
