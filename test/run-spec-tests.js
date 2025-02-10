@@ -3,10 +3,10 @@ import { getTests, runTests, outputCompletionTable } from '@markedjs/testutils';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-function parse(markdown, options) {
-  const marked = new Marked(options);
-  return marked.parse(markdown);
-}
+// function parse(markdown, options) {
+//   const marked = new Marked(options);
+//   return marked.parse(markdown);
+// }
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -22,29 +22,29 @@ const [commonMarkTests, gfmTests, newTests, originalTests, redosTests] =
 outputCompletionTable('CommonMark', commonMarkTests);
 runTests({
   tests: commonMarkTests,
-  parse,
+  parse: new Marked().parse,
   defaultMarkedOptions: { gfm: false, pedantic: false },
 });
 
 outputCompletionTable('GFM', gfmTests);
 runTests({
   tests: gfmTests,
-  parse,
+  parse: new Marked().parse,
   defaultMarkedOptions: { gfm: true, pedantic: false },
 });
 
 runTests({
   tests: newTests,
-  parse,
+  parse: new Marked().parse,
 });
 
 runTests({
   tests: originalTests,
-  parse,
+  parse: new Marked().parse,
   defaultMarkedOptions: { gfm: false, pedantic: true },
 });
 
 runTests({
   tests: redosTests,
-  parse,
+  parse: new Marked().parse,
 });
