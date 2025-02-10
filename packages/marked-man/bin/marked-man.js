@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import markedMan from 'marked-man-src';
+import * as markedMan from 'marked-man';
 import { marked } from 'marked';
 
 const { argv } = process;
@@ -15,6 +15,6 @@ if (fileArg === argv[1] || fileArg.startsWith('-')) {
   fileArg = null;
 }
 
-marked.use(Object.assign(markedMan, { fileArg }));
+marked.use(Object.assign({}, markedMan, { fileArg }));
 
-import('marked-cli/bin/marked');
+import('marked-cli/bin/marked.js');

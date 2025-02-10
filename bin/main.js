@@ -1,2 +1,2 @@
 #!/usr/bin/env node
-import 'marked-cli/bin/main.js';
+export * from 'marked-cli/bin/main.js';

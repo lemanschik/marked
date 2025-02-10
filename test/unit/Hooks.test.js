@@ -1,4 +1,4 @@
-import { Marked } from '../../lib/marked.js';
+import { Marked } from 'marked-src/lib/marked.js';
 import { timeout } from './utils.js';
 import { describe, it, beforeEach } from 'node:test';
 import assert from 'node:assert';

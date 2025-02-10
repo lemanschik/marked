@@ -3,7 +3,7 @@
   "workspaces":["packages/**/*","."],
   "description": "A markdown parser built for speed",
   "author": "Christopher Jeffrey",
-  "version": "15.1.0",
+  "version": "16.0.0",
   "type": "module",
   "main": "./lib/marked.js",
   "module": "./lib/marked.js",

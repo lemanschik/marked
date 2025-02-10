@@ -1,4 +1,4 @@
-import { Parser } from '../../lib/marked.js';
+import { Parser } from 'marked-src/lib/marked.js';
 import { htmlIsEqual, firstDiff } from '@markedjs/testutils';
 import assert from 'node:assert';
 import { describe, it } from 'node:test';

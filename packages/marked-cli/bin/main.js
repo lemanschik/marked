@@ -11,6 +11,7 @@ import { homedir } from 'node:os';
 import { marked } from 'marked/dist/marked.esm.js';
 import { spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import process from 'node:process';
 
 process.title = 'marked';
 
@@ -270,8 +271,8 @@ function camelize(text) {
 /**
  * @param {Process} process inject process so it can be mocked in tests.
  */
-export function main(process) {
-  if (process.argv.length <= 2) {
+export function main() {
+  if (process.argv.length <= 1) {
     throw new Error('Supply args or --help');
   }
 

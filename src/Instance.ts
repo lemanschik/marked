@@ -202,7 +202,6 @@ export class Marked {
           const hooksFunc = pack.hooks[hooksProp] as UnknownFunction;
           const prevHook = hooks[hooksProp] as UnknownFunction;
           if (_Hooks.passThroughHooks.has(prop)) {
-            // @ts-expect-error cannot type hook function dynamically
             hooks[hooksProp] = (arg: unknown) => {
               if (this.defaults.async) {
                 return Promise.resolve(hooksFunc.call(hooks, arg)).then(ret => {
