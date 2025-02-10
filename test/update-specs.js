@@ -1,53 +1,63 @@
-import { readdirSync, unlinkSync, writeFileSync } from 'node:fs';
-import { join, resolve, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { writeFile, readdir, unlink } from 'node:fs/promises';
+import { join, resolve } from 'node:path';
 import { load } from 'cheerio';
 import { htmlIsEqual } from '@markedjs/testutils';
 import { Marked } from '../lib/marked.js';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+const fullpath = dir => file => join(dir, file);
+const removeFiles = dir => readdir(dir).then(
+  files => Promise.all(files.map(fullpath(dir)).map(unlink)),
+).then(() => dir);
 
-function removeFiles(dir) {
-  readdirSync(dir).forEach(file => {
-    unlinkSync(join(dir, file));
-  });
-}
+const commonmarkVersionSpecsPromise = fetch(
+  'https://raw.githubusercontent.com/commonmark/commonmark.js/master/package.json',
+).then(r => r.json()).then(
+  ({ version }) => fetch(`https://spec.commonmark.org/${version}/spec.json`).then(
+    specsResponse => specsResponse.json().then(
+      specs => ({ version, specs }),
+    )),
+);
 
-async function updateCommonmark(dir, options) {
-  try {
-    const res = await fetch('https://raw.githubusercontent.com/commonmark/commonmark.js/master/package.json');
-    const pkg = await res.json();
-    const { version } = pkg;
-    const res2 = await fetch(`https://spec.commonmark.org/${version}/spec.json`);
-    const json = await res2.json();
-    const specs = await Promise.all(json.map(async(spec) => {
-      const marked = new Marked();
-      const html = marked.parse(spec.markdown, options);
-      const isEqual = await htmlIsEqual(html, spec.html);
-      if (!isEqual) {
-        spec.shouldFail = true;
+function updateCommonmark(dir = '') {
+  const gfm = dir.endsWith('gfm');
+
+  return commonmarkVersionSpecsPromise.then(({ version, specs }) =>
+    writeFile(
+      resolve(dir, `./commonmark.${version}.json`),
+      JSON.stringify(specs.map(
+        spec =>
+          !htmlIsEqual(
+            new Marked().parse(spec.markdown, { gfm, pedantic: false }),
+            spec.html,
+          )
+            ? Object.assign(spec, { shouldFail: true })
+            : spec,
+
+      ), null, 2) + '\n',
+    ).then(() => {
+      console.log(`Saved CommonMark v${version} specs`);
+      if (gfm) {
+        return updateGfm(dir);
       }
-      return spec;
-    }));
-    writeFileSync(resolve(dir, `./commonmark.${version}.json`), JSON.stringify(specs, null, 2) + '\n');
-    console.log(`Saved CommonMark v${version} specs`);
-  } catch (ex) {
-    console.log(ex);
-  }
+    }),
+  );
 }
 
-async function updateGfm(dir) {
-  try {
-    const res = await fetch('https://github.github.com/gfm/');
-    const html = await res.text();
+function updateGfm(dir) {
+  return fetch('https://github.github.com/gfm/').then(r => r.text()).then(html => {
     const $ = load(html);
-    const version = $('.version').text().match(/\d+\.\d+/)[0];
+    // const version = $('.version').text().match(/\d+\.\d+/)[0];
+    const version = html.split('"version">Version ', 2).at(1).split('-').at(0);
     if (!version) {
       throw new Error('No version found');
     }
-    let specs = [];
+    const specs = [];
     $('.extension').each((i, ext) => {
-      const section = $('.definition', ext).text().trim().replace(/^\d+\.\d+(.*?) \(extension\)[\s\S]*$/, '$1');
+      const section = $('.definition', ext).text().trim().replace(
+        /^\d+\.\d+(.*?) \(extension\)[\s\S]*$/,
+        '$1',
+      );
+
       $('.example', ext).each((j, exa) => {
         const example = +$(exa).attr('id').replace(/\D/g, '');
         const markdown = $('.language-markdown', exa).text().trim();
@@ -60,27 +70,31 @@ async function updateGfm(dir) {
         });
       });
     });
-
-    specs = await Promise.all(specs.map(async(spec) => {
-      const marked = new Marked();
-      const html = marked.parse(spec.markdown, { gfm: true, pedantic: false });
-      const isEqual = await htmlIsEqual(html, spec.html);
-      if (!isEqual) {
-        spec.shouldFail = true;
-      }
-      return spec;
-    }));
-    writeFileSync(resolve(dir, `./gfm.${version}.json`), JSON.stringify(specs, null, 2) + '\n');
-    console.log(`Saved GFM v${version} specs.`);
-  } catch (ex) {
-    console.log(ex);
-  }
+    return { version, specs };
+  }).then(({ version, specs }) =>
+    writeFile(
+      resolve(dir, `./gfm.${version}.json`),
+      `${JSON.stringify(specs.map((spec) =>
+        !htmlIsEqual(
+          new Marked().parse(
+            spec.markdown, { gfm: true, pedantic: false },
+          ),
+          spec.html,
+        )
+          ? Object.assign(spec, { shouldFail: true })
+          : spec,
+      ), null, 2)}\n`,
+    ).then(() => console.log(`Saved GFM v${version} specs.`)),
+  );
 }
 
-const commonmarkDir = resolve(__dirname, './specs/commonmark');
-const gfmDir = resolve(__dirname, './specs/gfm');
-removeFiles(commonmarkDir);
-removeFiles(gfmDir);
-updateCommonmark(commonmarkDir, { gfm: false, pedantic: false });
-updateCommonmark(gfmDir, { gfm: true, pedantic: false });
-updateGfm(gfmDir);
+process.on('unhandledRejection', (reason, p) => {
+  console.error('Unhandled Rejection at:', p, 'reason:', reason);
+});
+
+process.on('uncaughtException', (error) => {
+  console.error(`Caught exception: ${error}\n` + `Exception origin: ${error.stack}`);
+});
+
+removeFiles(resolve(import.meta.dirname, './specs/commonmark')).then(updateCommonmark);
+removeFiles(resolve(import.meta.dirname, './specs/gfm')).then(updateCommonmark);

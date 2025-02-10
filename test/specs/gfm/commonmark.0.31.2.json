@@ -253,8 +253,7 @@
     "example": 32,
     "start_line": 735,
     "end_line": 739,
-    "section": "Entity and numeric character references",
-    "shouldFail": true
+    "section": "Entity and numeric character references"
   },
   {
     "markdown": "[foo]\n\n[foo]: /f&ouml;&ouml; \"f&ouml;&ouml;\"\n",
@@ -262,8 +261,7 @@
     "example": 33,
     "start_line": 742,
     "end_line": 748,
-    "section": "Entity and numeric character references",
-    "shouldFail": true
+    "section": "Entity and numeric character references"
   },
   {
     "markdown": "``` f&ouml;&ouml;\nfoo\n```\n",
@@ -3975,8 +3973,7 @@
     "example": 497,
     "start_line": 7666,
     "end_line": 7670,
-    "section": "Links",
-    "shouldFail": true
+    "section": "Links"
   },
   {
     "markdown": "[link](foo\\(and\\(bar\\))\n",
@@ -4024,8 +4021,7 @@
     "example": 503,
     "start_line": 7731,
     "end_line": 7735,
-    "section": "Links",
-    "shouldFail": true
+    "section": "Links"
   },
   {
     "markdown": "[link](\"title\")\n",
@@ -4057,8 +4053,7 @@
     "example": 507,
     "start_line": 7776,
     "end_line": 7780,
-    "section": "Links",
-    "shouldFail": true
+    "section": "Links"
   },
   {
     "markdown": "[link](/url \"title \"and\" title\")\n",
@@ -4098,8 +4093,7 @@
     "example": 512,
     "start_line": 7840,
     "end_line": 7844,
-    "section": "Links",
-    "shouldFail": true
+    "section": "Links"
   },
   {
     "markdown": "[link] bar](/uri)\n",
@@ -4147,8 +4141,7 @@
     "example": 518,
     "start_line": 7886,
     "end_line": 7890,
-    "section": "Links",
-    "shouldFail": true
+    "section": "Links"
   },
   {
     "markdown": "[foo *[bar [baz](/uri)](/uri)*](/uri)\n",
@@ -4156,8 +4149,7 @@
     "example": 519,
     "start_line": 7893,
     "end_line": 7897,
-    "section": "Links",
-    "shouldFail": true
+    "section": "Links"
   },
   {
     "markdown": "![[[foo](uri1)](uri2)](uri3)\n",
@@ -4165,8 +4157,7 @@
     "example": 520,
     "start_line": 7900,
     "end_line": 7904,
-    "section": "Links",
-    "shouldFail": true
+    "section": "Links"
   },
   {
     "markdown": "*[foo*](/uri)\n",
@@ -4198,8 +4189,7 @@
     "example": 524,
     "start_line": 7937,
     "end_line": 7941,
-    "section": "Links",
-    "shouldFail": true
+    "section": "Links"
   },
   {
     "markdown": "[foo`](/uri)`\n",
@@ -4215,8 +4205,7 @@
     "example": 526,
     "start_line": 7951,
     "end_line": 7955,
-    "section": "Links",
-    "shouldFail": true
+    "section": "Links"
   },
   {
     "markdown": "[foo][bar]\n\n[bar]: /url \"title\"\n",
@@ -4232,8 +4221,7 @@
     "example": 528,
     "start_line": 8004,
     "end_line": 8010,
-    "section": "Links",
-    "shouldFail": true
+    "section": "Links"
   },
   {
     "markdown": "[link \\[bar][ref]\n\n[ref]: /uri\n",
@@ -4265,8 +4253,7 @@
     "example": 532,
     "start_line": 8044,
     "end_line": 8050,
-    "section": "Links",
-    "shouldFail": true
+    "section": "Links"
   },
   {
     "markdown": "[foo *bar [baz][ref]*][ref]\n\n[ref]: /uri\n",
@@ -4274,8 +4261,7 @@
     "example": 533,
     "start_line": 8053,
     "end_line": 8059,
-    "section": "Links",
-    "shouldFail": true
+    "section": "Links"
   },
   {
     "markdown": "*[foo*][ref]\n\n[ref]: /uri\n",
@@ -4299,8 +4285,7 @@
     "example": 536,
     "start_line": 8089,
     "end_line": 8095,
-    "section": "Links",
-    "shouldFail": true
+    "section": "Links"
   },
   {
     "markdown": "[foo`][ref]`\n\n[ref]: /uri\n",
@@ -4316,8 +4301,7 @@
     "example": 538,
     "start_line": 8107,
     "end_line": 8113,
-    "section": "Links",
-    "shouldFail": true
+    "section": "Links"
   },
   {
     "markdown": "[foo][BaR]\n\n[bar]: /url \"title\"\n",
@@ -4333,8 +4317,7 @@
     "example": 540,
     "start_line": 8129,
     "end_line": 8135,
-    "section": "Links",
-    "shouldFail": true
+    "section": "Links"
   },
   {
     "markdown": "[Foo\n  bar]: /url\n\n[Baz][Foo bar]\n",
@@ -4598,8 +4581,7 @@
     "example": 573,
     "start_line": 8548,
     "end_line": 8554,
-    "section": "Images",
-    "shouldFail": true
+    "section": "Images"
   },
   {
     "markdown": "![foo ![bar](/url)](/url2)\n",
@@ -4607,8 +4589,7 @@
     "example": 574,
     "start_line": 8557,
     "end_line": 8561,
-    "section": "Images",
-    "shouldFail": true
+    "section": "Images"
   },
   {
     "markdown": "![foo [bar](/url)](/url2)\n",
@@ -4616,8 +4597,7 @@
     "example": 575,
     "start_line": 8564,
     "end_line": 8568,
-    "section": "Images",
-    "shouldFail": true
+    "section": "Images"
   },
   {
     "markdown": "![foo *bar*][]\n\n[foo *bar*]: train.jpg \"train & tracks\"\n",
@@ -4625,8 +4605,7 @@
     "example": 576,
     "start_line": 8578,
     "end_line": 8584,
-    "section": "Images",
-    "shouldFail": true
+    "section": "Images"
   },
   {
     "markdown": "![foo *bar*][foobar]\n\n[FOOBAR]: train.jpg \"train & tracks\"\n",
@@ -4634,8 +4613,7 @@
     "example": 577,
     "start_line": 8587,
     "end_line": 8593,
-    "section": "Images",
-    "shouldFail": true
+    "section": "Images"
   },
   {
     "markdown": "![foo](train.jpg)\n",
@@ -4699,8 +4677,7 @@
     "example": 585,
     "start_line": 8655,
     "end_line": 8661,
-    "section": "Images",
-    "shouldFail": true
+    "section": "Images"
   },
   {
     "markdown": "![Foo][]\n\n[foo]: /url \"title\"\n",
@@ -4732,8 +4709,7 @@
     "example": 589,
     "start_line": 8700,
     "end_line": 8706,
-    "section": "Images",
-    "shouldFail": true
+    "section": "Images"
   },
   {
     "markdown": "![[foo]]\n\n[[foo]]: /url \"title\"\n",
@@ -4837,8 +4813,7 @@
     "example": 602,
     "start_line": 8845,
     "end_line": 8849,
-    "section": "Autolinks",
-    "shouldFail": true
+    "section": "Autolinks"
   },
   {
     "markdown": "<https://example.com/\\[\\>\n",
@@ -4886,8 +4861,7 @@
     "example": 608,
     "start_line": 8908,
     "end_line": 8912,
-    "section": "Autolinks",
-    "shouldFail": true
+    "section": "Autolinks"
   },
   {
     "markdown": "<m:abc>\n",
@@ -4911,8 +4885,7 @@
     "example": 611,
     "start_line": 8929,
     "end_line": 8933,
-    "section": "Autolinks",
-    "shouldFail": true
+    "section": "Autolinks"
   },
   {
     "markdown": "foo@bar.example.com\n",
@@ -4920,8 +4893,7 @@
     "example": 612,
     "start_line": 8936,
     "end_line": 8940,
-    "section": "Autolinks",
-    "shouldFail": true
+    "section": "Autolinks"
   },
   {
     "markdown": "<a><bab><c2c>\n",

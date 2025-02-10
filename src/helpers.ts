@@ -10,9 +10,9 @@ const escapeReplacements: { [index: string]: string } = {
   '"': '&quot;',
   "'": '&#39;',
 };
-const getEscapeReplacement = (ch: string) => escapeReplacements[ch];
+const getEscapeReplacement = (ch = '') => escapeReplacements[ch];
 
-export function escape(html: string, encode?: boolean) {
+export function escape(html = '', encode = false) {
   if (encode) {
     if (other.escapeTest.test(html)) {
       return html.replace(other.escapeReplace, getEscapeReplacement);
@@ -26,28 +26,29 @@ export function escape(html: string, encode?: boolean) {
   return html;
 }
 
-export function unescape(html: string) {
-  // explicitly match decimal, hex, and named HTML entities
-  return html.replace(other.unescapeTest, (_, n) => {
-    n = n.toLowerCase();
-    if (n === 'colon') return ':';
-    if (n.charAt(0) === '#') {
-      return n.charAt(1) === 'x'
-        ? String.fromCharCode(parseInt(n.substring(2), 16))
-        : String.fromCharCode(+n.substring(1));
-    }
-    return '';
-  });
+// explicitly match decimal, hex, and named HTML entities
+const unescapeReplaceFn = (_, n = '') => {
+  n = n.toLowerCase();
+  if (n === 'colon') return ':';
+  if (n.charAt(0) === '#') {
+    return n.charAt(1) === 'x'
+      ? String.fromCharCode(parseInt(n.substring(2), 16))
+      : String.fromCharCode(+n.substring(1));
+  }
+  return '';
+};
+
+export function unescape(html = '') {
+  return html.replace(other.unescapeTest, unescapeReplaceFn);
 }
 
-export function cleanUrl(href: string) {
+export const cleanUrl = (href = '') => {
   try {
-    href = encodeURI(href).replace(other.percentDecode, '%');
+    return encodeURI(href).replace(other.percentDecode, '%');
   } catch {
     return null;
   }
-  return href;
-}
+};
 
 export function splitCells(tableRow: string, count?: number) {
   // ensure that every cell-delimiting pipe has a space

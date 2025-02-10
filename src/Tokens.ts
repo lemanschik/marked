@@ -16,102 +16,16 @@ export const TokensList = (params: { links: Links; tokens: Token[] }) => {
   return Object.assign([...params.tokens], { links: params.links });
 };
 
-export const nsTokens = /** @type {const} */  ({
-  ListItem,
-  TableCell,
-  Blockquote(params: { raw: string; text: string; tokens: Token[] }) {
-    return { type: 'blockquote', ...params };
-  },
 
-  Br(params: { raw: string }) {
-    return { type: 'br', ...params };
-  },
-
-  Checkbox(params: { checked: boolean }) {
-    return { ...params };
-  },
-
-  Code(params: { raw: string; text: string; lang?: string; codeBlockStyle?: 'indented'; escaped?: boolean }) {
-    return { type: 'code', ...params };
-  },
-
-  Codespan(params: { raw: string; text: string }) {
-    return { type: 'codespan', ...params };
-  },
-
-  Def(params: { raw: string; tag: string; href: string; title: string }) {
-    return { type: 'def', ...params };
-  },
-
-  Del(params: { raw: string; text: string; tokens: Token[] }) {
-    return { type: 'del', ...params };
-  },
-
-  Em(params: { raw: string; text: string; tokens: Token[] }) {
-    return { type: 'em', ...params };
-  },
-
-  Escape(params: { raw: string; text: string }) {
-    return { type: 'escape', ...params };
-  },
-
-  Generic(params: { type: string; raw: string; tokens?: Token[] }) {
-    return { ...params };
-  },
-
-  Heading(params: { raw: string; depth: number; text: string; tokens: Token[] }) {
-    return { type: 'heading', ...params };
-  },
-
-  Hr(params: { raw: string }) {
-    return { type: 'hr', ...params };
-  },
-
-  HTML(params: { raw: string; pre: boolean; text: string; block: boolean }) {
-    return { type: 'html', ...params };
-  },
-
-  Image(params: { raw: string; href: string; title: string | null; text: string }) {
-    return { type: 'image', ...params };
-  },
-
-  Link(params: { raw: string; href: string; text: string; tokens: Token[]; title?: string | null }) {
-    return { type: 'link', ...params };
-  },
-
-  List(params: { raw: string; ordered: boolean; start: number | ''; loose: boolean; items: ReturnType<typeof ListItem>[] }) {
-    return { type: 'list', ...params };
-  },
-
-  Paragraph(params: { raw: string; text: string; tokens: Token[]; pre?: boolean }) {
-    return { type: 'paragraph', ...params };
-  },
-
-  Space(params: { raw: string }) {
-    return { type: 'space', ...params };
-  },
-
-  Strong(params: { raw: string; text: string; tokens: Token[] }) {
-    return { type: 'strong', ...params };
-  },
-
-  Table(params: { raw: string; align: Array<'center' | 'left' | 'right' | null>; header: ReturnType<typeof TableCell>[]; rows: ReturnType<typeof TableCell>[][] }) {
-    return { type: 'table', ...params };
-  },
-
-  Tag(params: { raw: string; inLink: boolean; inRawBlock: boolean; text: string; block: boolean }) {
-    return { type: 'html', ...params };
-  },
-
-  Text(params: { raw: string; text: string; tokens?: Token[]; escaped?: boolean }) {
-    return { type: 'text', ...params };
-  },
-
-});
 
 export type MarkedToken = (Tokens.Blockquote | Tokens.Br | Tokens.Code | Tokens.Codespan | Tokens.Def | Tokens.Del | Tokens.Em | Tokens.Escape | Tokens.Heading | Tokens.Hr | Tokens.HTML | Tokens.Image | Tokens.Link | Tokens.List | Tokens.ListItem | Tokens.Paragraph | Tokens.Space | Tokens.Strong | Tokens.Table | Tokens.Tag | Tokens.Text);
 export type Token = (MarkedToken | Tokens.Generic);
 
+export class TokenTypes {
+  constructor({ type = '', raw = '' }) {
+    Object.assign(this,{ type, raw });
+  }
+}
 
 export namespace Tokens {
   export interface Blockquote {

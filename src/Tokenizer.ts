@@ -86,7 +86,7 @@ export class _Tokenizer {
     }
   }
 
-  code(src: string): Tokens.Code | undefined {
+  code(src: string) {
     const cap = this.rules.block.code.exec(src);
     if (cap) {
       const text = cap[0].replace(this.rules.other.codeRemoveIndent, '');
@@ -101,7 +101,7 @@ export class _Tokenizer {
     }
   }
 
-  fences(src: string): Tokens.Code | undefined {
+  fences(src: string) {
     const cap = this.rules.block.fences.exec(src);
     if (cap) {
       const raw = cap[0];
@@ -830,7 +830,7 @@ export class _Tokenizer {
   }
 
   url(src: string): Tokens.Link | undefined {
-    let cap = this.rules.inline.url.exec(src);
+    const cap = this.rules.inline.url.exec(src);
     if (cap) {
       let text, href;
       if (cap[2] === '@') {
